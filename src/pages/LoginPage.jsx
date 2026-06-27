@@ -1,26 +1,30 @@
 import { useState } from "react";
-export default LoginPage;
 
-export function LoginPage(){
-    const [username,SetUsername]=useState("");
-    const[password,SetPassword]=useState("");
-    return(
-        <div className="LoginCredentials" >
+function LoginPage({ onLogin }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-            <h1>Fokus</h1>
-            <input
-             type="text" 
-             placeholder="username" 
-             onChange={(e)=>SetUsername(e.target.value)}/>
+  return (
+    <div className="LoginCredentials">
+      <h1>Fokus</h1>
 
-            <input 
-             type="text"
-             placeholder="password"
-             onChange={(e)=>SetPassword(e.target.value)}/>
+      <input
+        type="text"
+        placeholder="username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
 
-            <button>Login</button>
-        </div>
-    
-    );
+      <input
+        type="password"
+        placeholder="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
+      <button onClick={onLogin}>Login</button>
+    </div>
+  );
 }
+
+export default LoginPage;

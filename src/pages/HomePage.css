@@ -1,42 +1,57 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.Dashboard {
+  display: grid;
+  gap: 1.5rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.dashboard__header h1,
+.dashboard__header p {
+  margin: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.dashboard__eyebrow {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #be5b2d;
+}
+
+.dashboard__header h1 {
+  margin-top: 0.35rem;
+  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  color: #122033;
+}
+
+.dashboard__copy {
+  margin-top: 0.75rem;
+  max-width: 42rem;
+  color: #556070;
+}
+
+.dashboard__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1rem;
+}
+
+.dashboard__panel {
+  border: 1px solid #dddfe6;
+  border-radius: 24px;
+  padding: 1.25rem;
+  background: rgba(255, 253, 250, 0.86);
+  backdrop-filter: blur(8px);
+}
+
+.dashboard__panel:last-child {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 900px) {
+  .dashboard__grid {
+    grid-template-columns: 1fr;
   }
-  to {
-    transform: rotate(360deg);
+
+  .dashboard__panel:last-child {
+    grid-column: auto;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
