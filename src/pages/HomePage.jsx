@@ -5,7 +5,7 @@ import TaskDetails from "../Components/TaskDetails";
 import CalendarView from "../Components/CalendarView";
 import "./HomePage.css";
 
-const API_URL = "http://localhost:5000/tasks";
+const API_URL = "http://localhost:5001/tasks";
 
 function HomePage() {
   const [tasks, setTasks] = useState([]);

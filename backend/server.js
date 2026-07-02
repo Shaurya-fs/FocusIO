@@ -3,7 +3,7 @@ const mysql=require("mysql2");
 const cors = require("cors");
 require("dotenv").config();
 const app= express();
-const port = 5000
+const port = 5001;
 app.use(cors());
 app.use(express.json());
 const db=mysql.createConnection({
@@ -24,15 +24,22 @@ db.connect((err)=>{
 app.get('/tasks', (req, res) => {
     const sql = "SELECT * FROM tasks";
 
-    db.query(sql, (err, results) => {
-        if (err) {
-            return res.status(500).json({ message: "Error fetching tasks" });
-        }
+   db.query(sql, (err, results) => {
+    if (err) {
+        console.error("MySQL Error:", err);
 
-        res.json(results);
-    });
+        return res.status(500).json({
+            message: err.message
+        });
+    }
+
+    res.json(results);
+  });
 });
 app.post('/tasks',(req,res)=>{
+
+    console.log("POST /tasks called");
+    console.log(req.body);
     const{title}=req.body;
 
     if(!title){
@@ -79,6 +86,6 @@ app.delete("/tasks/:id", (req, res) => {
   });
 });
 
-app.listen(5000, () => {
-  console.log(`the code is running at 5000`)
+app.listen(port, () => {
+  console.log(`the code is running at ${port}`)
 })
