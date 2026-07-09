@@ -53,6 +53,10 @@ app.post('/tasks',(req,res)=>{
         res.status(201).json({
             id: result.insertId,
             title,
+            Description,
+            dueDate,
+            priority,
+            estimatedDuration,
             completed:false
         });
     });

@@ -25,8 +25,8 @@ function HomePage() {
     fetchTasks();
   }, []);
 
-  const addTask = async (title) => {
-    const cleanedTitle = title.trim();
+  const addTask = async (newTask) => {
+    const cleanedTitle = newTask.title.trim();
 
     if (!cleanedTitle) {
       return;
@@ -38,7 +38,7 @@ function HomePage() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ title: cleanedTitle })
+        body: JSON.stringify(newTask)
       });
 
       fetchTasks();
