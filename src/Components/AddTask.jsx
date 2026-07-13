@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./AddTask.css";
 
-function AddTask({ addTask }) {
+function AddTask({ addTask, updateTask, editingTask }) {
   const [task, setTask] = useState({
     title: "",
     description: "",
@@ -10,6 +10,12 @@ function AddTask({ addTask }) {
     estimatedDuration: "",
   });
 
+  useEffect(() => {
+    if (editingTask) {
+      setTask(editingTask);
+    }
+  }, [editingTask]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -17,7 +23,12 @@ function AddTask({ addTask }) {
       return;
     }
 
-    addTask(task);
+    if (editingTask) {
+      updateTask(task);
+    } else {
+      addTask(task);
+    }
+
     setTask({
       title: "",
       description: "",
@@ -30,7 +41,7 @@ function AddTask({ addTask }) {
   return (
     <form className="add-task" onSubmit={handleSubmit}>
       <div className="add-task__copy">
-        <h2>Add a task</h2>
+        <h2>{editingTask ? "Edit Task" : "Add a Task"}</h2>
       </div>
 
       <div className="add-task__controls">
@@ -62,14 +73,19 @@ function AddTask({ addTask }) {
             ...task,dueDate:event.target.value
           })}
           placeholder="Due Date"/>
-        <input 
-        type="text"
-        className="add-task__priority"
-        value={task.priority}
-        onChange={(event)=>setTask({
-          ...task,priority:event.target.value
-        })}
-        placeholder="Priority"/>
+        <select
+            value={task.priority}
+            onChange={(event) =>
+                setTask({
+                    ...task,
+                    priority: event.target.value,
+                })
+            }
+        >
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
         <input 
         type="number"
         className="add-task__estimatedDuration"
@@ -81,7 +97,7 @@ function AddTask({ addTask }) {
       
 
         <button className="add-task__button" type="submit">
-          Add
+          {editingTask ? "Save Changes" : "Add Task"}
         </button>
       </div>
     </form>

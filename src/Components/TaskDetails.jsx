@@ -13,6 +13,11 @@ function TaskDetails({task}){
             <h2>Task details</h2>
             <h3>{task.title}</h3>
             <p>status:{task.completed? "Completed" : "Active"}</p>
+            {task.description &&(<p>Description:{task.description}</p>)}
+            {task.priority &&(<p>priority:{task.priority}</p>)}
+            {task.dueDate && (<p>Due Date:{task.dueDate}</p>)}
+            {task.estimateDuration && 
+            (<p>Estimated Duration:{task.estimatedDuration} hours</p>)}
         </div>
     );
 }

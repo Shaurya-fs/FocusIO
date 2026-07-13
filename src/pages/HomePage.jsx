@@ -10,6 +10,10 @@ const API_URL = "http://localhost:5001/tasks";
 function HomePage() {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [editingTask, setEditingTask] =useState(null);
+  const startEditing=(task)=>{
+    setEditingTask(task);
+  }
 
   const fetchTasks = async () => {
     try {
@@ -47,6 +51,23 @@ function HomePage() {
     }
   };
 
+  const updateTask = async (updatedTask) => {
+    try {
+      await fetch(`${API_URL}/${updatedTask.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedTask)
+      });
+
+      fetchTasks();
+      setEditingTask(null);
+    } catch (error) {
+      console.log("Error updating task:", error);
+    }
+  };
+
   const toggleTask = async (taskId) => {
     const taskToUpdate = tasks.find((task) => task.id === taskId);
 
@@ -62,6 +83,10 @@ function HomePage() {
         },
         body: JSON.stringify({
           title: taskToUpdate.title,
+          description: taskToUpdate.description,
+          dueDate: taskToUpdate.dueDate,
+          priority: taskToUpdate.priority,
+          estimatedDuration: taskToUpdate.estimatedDuration,
           completed: !taskToUpdate.completed
         })
       });
@@ -99,13 +124,18 @@ function HomePage() {
     <div className="Dashboard">
       <h1>Fokus Dashboard</h1>
 
-      <AddTask addTask={addTask} />
+      <AddTask
+        addTask={addTask}
+        updateTask={updateTask}
+        editingTask={editingTask}
+      />
 
       <TaskList
         tasks={tasks}
         toggleTask={toggleTask}
         deleteTask={deleteTask}
         onSelectTask={setSelectedTask}
+        startEditing={startEditing}
       />
 
       <TaskDetails task={selectedTask} />

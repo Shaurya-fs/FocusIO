@@ -40,20 +40,31 @@ app.post('/tasks',(req,res)=>{
 
     console.log("POST /tasks called");
     console.log(req.body);
-    const{title}=req.body;
+    const {
+      title,
+      description,
+      dueDate,
+      priority,
+      estimatedDuration,
+    } = req.body;
 
     if(!title){
         return res.status(400).json({message:'title is required'});
     }
-    const sql = "INSERT INTO tasks (title, completed) VALUES (?, false)";
-    db.query(sql,[title],(err,result)=>{
+    const sql = `
+    INSERT INTO tasks
+    (title, description, due_date, priority, estimated_duration, completed)
+    VALUES (?, ?, ?, ?, ?, false)
+    `;
+    db.query(sql,[title, description, dueDate, priority, estimatedDuration],(err,result)=>{
         if(err){
-            return res.status(500).json({messgae:"Error Adding task"});
+            console.error(err)
+            return res.status(500).json({messgae:"Error Adding task", error:err.message});
         }
         res.status(201).json({
             id: result.insertId,
             title,
-            Description,
+            description,
             dueDate,
             priority,
             estimatedDuration,
@@ -63,11 +74,13 @@ app.post('/tasks',(req,res)=>{
 });
 app.patch('/tasks/:id',(req,res)=>{
     const {id}=req.params;
-    const{title,completed}= req.body;
-    const sql = "UPDATE tasks SET title = ?, completed = ? WHERE id = ?";
-    db.query(sql,[title,completed,id],(err,result)=>{
+    const{title,description,dueDate,priority,estimatedDuration,completed}= req.body;
+    const sql = "UPDATE tasks SET title = ?,description = ?,due_date = ?,priority = ?,estimated_duration = ?,completed = ? WHERE id = ?";
+    db.query(sql,[title,description,dueDate,priority,estimatedDuration,completed,id],(err,result)=>{
         if(err){
-            return res.status(500).json({message:"Error updating task"});
+            return res.status(500).json({message:"Error updating task",
+            error:err.message
+            });
         }
         if(result.affectedRows===0){
             return res.status(404).json({message:'Task not found'});
