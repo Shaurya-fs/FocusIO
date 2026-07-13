@@ -1,6 +1,6 @@
 import "./TaskList.css";
 
-export function TaskList({ tasks, toggleTask, deleteTask, onSelectTask }) {
+export function TaskList({ tasks, toggleTask, deleteTask, onSelectTask, startEditing }) {
   return (
     <div className="task-list">
       <h2>Tasks</h2>
@@ -18,16 +18,13 @@ export function TaskList({ tasks, toggleTask, deleteTask, onSelectTask }) {
               {task.dueDate &&(<p>Due Date: {task.dueDate}</p>)}
               {task.estimatedDuration 
                &&(<p>Estimated Duration: {task.estimatedDuration} minutes</p>)}
-               {task.startEditing &&(<p>Editing:{task.startediting}</p>)}
-
             </div>
             
 
             <button onClick={() => toggleTask(task.id)}>
               {task.completed ? "Undo" : "Complete"}
             </button>
-            <button className= "editTask_button" onClick={()=>startEditing(task)}>
-
+            <button className="editTask_button" onClick={() => startEditing(task)}>
               Edit Task
             </button>
 

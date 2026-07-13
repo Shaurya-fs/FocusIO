@@ -3,6 +3,7 @@ import AddTask from "../Components/AddTask";
 import { TaskList } from "../Components/TaskList";
 import TaskDetails from "../Components/TaskDetails";
 import CalendarView from "../Components/CalendarView";
+import AIPlanner from "../Components/AIPlanner";
 import "./HomePage.css";
 
 const API_URL = "http://localhost:5001/tasks";
@@ -139,6 +140,7 @@ function HomePage() {
       />
 
       <TaskDetails task={selectedTask} />
+      <AIPlanner />
 
       <CalendarView tasks={tasks} />
     </div>
