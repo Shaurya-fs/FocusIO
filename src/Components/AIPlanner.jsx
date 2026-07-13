@@ -3,6 +3,26 @@ import "./AIPlanner.css";
 
 function AIPlanner() {
   const [schedule, setSchedule] = useState("");
+  const handleGenerate = async () => {
+  setLoading(true);
+
+  try {
+            const response = await fetch("http://localhost:5001/generateSchedule", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            });
+
+            const data = await response.json();
+
+            setSchedule(data.schedule);
+        } catch (error) {
+            console.log("Error generating schedule:", error);
+        }
+
+        setLoading(false);
+    };
 
   return (
     <div className="ai-planner">

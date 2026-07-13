@@ -102,7 +102,23 @@ app.delete("/tasks/:id", (req, res) => {
     res.json({ message: "Task deleted successfully" });
   });
 });
+app.post("/generateSchedule", (req, res) => {
+    console.log("Generate Schedule API called");
 
+    res.json({
+        schedule: `
+    09:00 - Finish Software Engineering Report
+
+    11:00 - Study React
+
+    14:00 - Work on FocusIO
+
+    18:00 - Gym
+
+    20:00 - Dinner
+    `
+    });
+});
 app.listen(port, () => {
   console.log(`the code is running at ${port}`)
 })
