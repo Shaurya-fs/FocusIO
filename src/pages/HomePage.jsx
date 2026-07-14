@@ -123,7 +123,7 @@ function HomePage() {
 
   return (
     <div className="Dashboard">
-      <h1>Fokus Dashboard</h1>
+      <h1>FocusIO</h1>
 
       <div className="dashboard__grid">
         <div className="dashboard__panel">
