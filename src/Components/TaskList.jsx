@@ -16,8 +16,9 @@ export function TaskList({ tasks, toggleTask, deleteTask, onSelectTask, startEdi
               {task.description &&(<p>{task.description}</p>)}
               {task.priority &&(<p>Priority: {task.priority}</p>)}
               {task.dueDate &&(<p>Due Date: {task.dueDate}</p>)}
-              {task.estimatedDuration 
-               &&(<p>Estimated Duration: {task.estimatedDuration} minutes</p>)}
+              {task.time && (
+                <p>Time: {task.time}</p>
+              )}
             </div>
             
 

@@ -87,7 +87,7 @@ function HomePage() {
           description: taskToUpdate.description,
           dueDate: taskToUpdate.dueDate,
           priority: taskToUpdate.priority,
-          estimatedDuration: taskToUpdate.estimatedDuration,
+          time: taskToUpdate.time,
           completed: !taskToUpdate.completed
         })
       });
@@ -125,24 +125,33 @@ function HomePage() {
     <div className="Dashboard">
       <h1>Fokus Dashboard</h1>
 
-      <AddTask
-        addTask={addTask}
-        updateTask={updateTask}
-        editingTask={editingTask}
-      />
+      <div className="dashboard__grid">
+        <div className="dashboard__panel">
+          <TaskList
+            tasks={tasks}
+            toggleTask={toggleTask}
+            deleteTask={deleteTask}
+            onSelectTask={setSelectedTask}
+            startEditing={startEditing}
+          />
+        </div>
 
-      <TaskList
-        tasks={tasks}
-        toggleTask={toggleTask}
-        deleteTask={deleteTask}
-        onSelectTask={setSelectedTask}
-        startEditing={startEditing}
-      />
+        <div className="dashboard__panel">
+          <AddTask
+            addTask={addTask}
+            updateTask={updateTask}
+            editingTask={editingTask}
+          />
+        </div>
 
-      <TaskDetails task={selectedTask} />
-      <AIPlanner />
+        <div className="dashboard__panel">
+          <AIPlanner />
+        </div>
 
-      <CalendarView tasks={tasks} />
+        <div className="dashboard__panel">
+          <CalendarView tasks={tasks} />
+        </div>
+      </div>
     </div>
   );
 }

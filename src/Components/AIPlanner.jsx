@@ -3,6 +3,7 @@ import "./AIPlanner.css";
 
 function AIPlanner() {
   const [schedule, setSchedule] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleGenerate = async () => {
   setLoading(true);
 
@@ -28,8 +29,8 @@ function AIPlanner() {
     <div className="ai-planner">
       <h2>AI Daily Planner</h2>
 
-      <button>
-        Generate Today's Schedule
+      <button onClick={handleGenerate} disabled={loading}>
+        {loading ? "Generating..." : "Generate Today's Schedule"}
       </button>
 
       <div className="schedule-box">

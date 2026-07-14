@@ -22,7 +22,18 @@ db.connect((err)=>{
     console.log("connected to MySQL");
 });
 app.get('/tasks', (req, res) => {
-    const sql = "SELECT * FROM tasks";
+    const sql = `
+SELECT
+    id,
+    title,
+    description,
+    due_date AS dueDate,
+    priority,
+    task_time AS time,
+    completed,
+    created_at AS createdAt
+FROM tasks;
+`;
 
    db.query(sql, (err, results) => {
     if (err) {
@@ -45,7 +56,7 @@ app.post('/tasks',(req,res)=>{
       description,
       dueDate,
       priority,
-      estimatedDuration,
+      time,
     } = req.body;
 
     if(!title){
@@ -53,10 +64,10 @@ app.post('/tasks',(req,res)=>{
     }
     const sql = `
     INSERT INTO tasks
-    (title, description, due_date, priority, estimated_duration, completed)
+    (title, description, due_date, priority, task_time, completed)
     VALUES (?, ?, ?, ?, ?, false)
     `;
-    db.query(sql,[title, description, dueDate, priority, estimatedDuration],(err,result)=>{
+    db.query(sql,[title, description, dueDate, priority, time],(err,result)=>{
         if(err){
             console.error(err)
             return res.status(500).json({messgae:"Error Adding task", error:err.message});
@@ -67,16 +78,16 @@ app.post('/tasks',(req,res)=>{
             description,
             dueDate,
             priority,
-            estimatedDuration,
+            time,
             completed:false
         });
     });
 });
 app.patch('/tasks/:id',(req,res)=>{
     const {id}=req.params;
-    const{title,description,dueDate,priority,estimatedDuration,completed}= req.body;
-    const sql = "UPDATE tasks SET title = ?,description = ?,due_date = ?,priority = ?,estimated_duration = ?,completed = ? WHERE id = ?";
-    db.query(sql,[title,description,dueDate,priority,estimatedDuration,completed,id],(err,result)=>{
+    const { title, description, dueDate, priority, time, completed } = req.body;
+    const sql = "UPDATE tasks SET title = ?, description = ?, due_date = ?, priority = ?, task_time = ?, completed = ? WHERE id = ?";
+    db.query(sql,[title, description, dueDate, priority, time, completed, id],(err,result)=>{
         if(err){
             return res.status(500).json({message:"Error updating task",
             error:err.message
@@ -103,21 +114,35 @@ app.delete("/tasks/:id", (req, res) => {
   });
 });
 app.post("/generateSchedule", (req, res) => {
-    console.log("Generate Schedule API called");
+  console.log("Generate Schedule API called");
 
-    res.json({
-        schedule: `
-    09:00 - Finish Software Engineering Report
+  const { tasks } = req.body;
 
-    11:00 - Study React
-
-    14:00 - Work on FocusIO
-
-    18:00 - Gym
-
-    20:00 - Dinner
-    `
+  if (!tasks || tasks.length === 0) {
+    return res.json({
+      schedule: "No tasks available. Please add some tasks first."
     });
+  }
+
+  const sortedTasks = [...tasks].sort((a, b) => {
+    const timeA = a.time || "23:59";
+    const timeB = b.time || "23:59";
+    return timeA.localeCompare(timeB);
+  });
+
+  let schedule = "Today's Schedule\n\n";
+
+  sortedTasks.forEach((task) => {
+    schedule += `${task.time || "No Time"} - ${task.title}`;
+
+    if (task.priority) {
+      schedule += ` (${task.priority} priority)`;
+    }
+
+    schedule += "\n";
+  });
+
+  res.json({ schedule });
 });
 app.listen(port, () => {
   console.log(`the code is running at ${port}`)

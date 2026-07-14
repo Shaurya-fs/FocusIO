@@ -7,7 +7,7 @@ function AddTask({ addTask, updateTask, editingTask }) {
     description: "",
     dueDate: "",
     priority: "medium",
-    estimatedDuration: "",
+    time: "",
   });
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function AddTask({ addTask, updateTask, editingTask }) {
       description: "",
       dueDate: "",
       priority: "medium",
-      estimatedDuration: "",
+      time: "",
     });
   };
 
@@ -65,14 +65,27 @@ function AddTask({ addTask, updateTask, editingTask }) {
           })}
           placeholder="Description"/>
 
+        <div className="add-task__row">
           <input
-          type="date"
-          className="add-task__dueDate"
-          value={task.dueDate}
-          onChange={(event)=>setTask({
-            ...task,dueDate:event.target.value
-          })}
-          placeholder="Due Date"/>
+            type="date"
+            className="add-task__dueDate"
+            value={task.dueDate}
+            onChange={(event)=>setTask({
+              ...task,dueDate:event.target.value
+            })}
+            placeholder="Due Date"/>
+          <input
+            type="time"
+            className="add-task__time"
+            value={task.time}
+            onChange={(event) =>
+              setTask({
+                ...task,
+                time: event.target.value,
+              })
+            }
+          />
+        </div>
         <select
             value={task.priority}
             onChange={(event) =>
@@ -86,16 +99,6 @@ function AddTask({ addTask, updateTask, editingTask }) {
             <option value="medium">Medium</option>
             <option value="high">High</option>
         </select>
-        <input 
-        type="number"
-        className="add-task__estimatedDuration"
-        value={task.estimatedDuration}
-        onChange={(event)=>setTask({
-          ...task,estimatedDuration:event.target.value
-        })}
-        placeholder="Estimated Duration"/>
-      
-
         <button className="add-task__button" type="submit">
           {editingTask ? "Save Changes" : "Add Task"}
         </button>

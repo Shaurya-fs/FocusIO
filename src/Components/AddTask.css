@@ -1,10 +1,14 @@
 .add-task {
-  display: grid;
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
 }
 
 .add-task__copy h2 {
-  margin: 0.25rem 0;
+  margin: 0;
+  color: #2E2E2E;
+  font-size: 1.35rem;
 }
 
 .add-task__copy p:last-child {
@@ -18,28 +22,69 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #be5b2d;
+  color: #8A9A5B;
 }
 
 .add-task__controls {
   display: flex;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.add-task__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 .add-task__input {
-  flex: 1;
-  border: 1px solid #d6dbe2;
-  border-radius: 14px;
-  padding: 0.95rem 1rem;
+  width: 100%;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 12px 14px;
   font-size: 1rem;
-  background: #fffdf8;
-  color: #122033;
+  background: white;
+  color: #2E2E2E;
+  box-sizing: border-box;
+}
+
+.add-task__textarea,
+.add-task__dueDate,
+.add-task__time,
+.add-task select {
+  width: 100%;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  background: white;
+  color: #2E2E2E;
+  box-sizing: border-box;
+}
+
+.add-task__input:focus,
+.add-task__textarea:focus,
+.add-task__dueDate:focus,
+.add-task__time:focus,
+.add-task select:focus {
+  outline: none;
+  border-color: #8A9A5B;
+  box-shadow: 0 0 0 3px rgba(138,154,91,0.15);
 }
 
 .add-task__button {
+  width: 100%;
   border: none;
-  border-radius: 14px;
-  padding: 0.95rem 1.25rem;
-  background: #122033;
-  color: #f8f4ed;
+  border-radius: 12px;
+  padding: 14px;
+  background: #8A9A5B;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-task__button:hover {
+  background: #72814B;
 }

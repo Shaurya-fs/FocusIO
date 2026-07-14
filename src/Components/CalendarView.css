@@ -1,6 +1,8 @@
 .calendar-view {
-  display: grid;
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
 }
 
 .calendar-view__copy h2,
@@ -9,20 +11,22 @@
 }
 
 .calendar-view__copy h2 {
-  margin: 0.25rem 0;
+  margin: 0;
+  color: #2E2E2E;
+  font-size: 1.35rem;
 }
 
 .calendar-view__copy p:last-child {
-  color: #556070;
+  color: #6B7280;
 }
 
 .calendar-view__eyebrow {
   margin: 0;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #be5b2d;
+  color: #8A9A5B;
 }
 
 .calendar-view__stats {
@@ -32,10 +36,12 @@
 }
 
 .calendar-stat {
-  border-radius: 16px;
-  padding: 0.95rem;
-  background: linear-gradient(135deg, #fff3df, #f6e7d1);
-  color: #122033;
+  border-radius: 14px;
+  padding: 16px;
+  background: #FFFCF8;
+  border: 1px solid #E8E1D9;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  color: #2E2E2E;
 }
 
 .calendar-stat strong {
@@ -58,18 +64,24 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: fit-content;
-  min-width: 15rem;
-  border-radius: 14px;
-  padding: 0.95rem 1.25rem;
-  background: #122033;
-  color: #f8f4ed;
+  width: 100%;
+  border-radius: 12px;
+  padding: 14px;
+  background: #8A9A5B;
+  color: white;
   text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.calendar-view__primary:hover {
+  background: #72814B;
 }
 
 .calendar-view__note {
   margin: 0;
-  color: #556070;
+  color: #6B7280;
+  font-size: 0.95rem;
 }
 
 @media (max-width: 900px) {

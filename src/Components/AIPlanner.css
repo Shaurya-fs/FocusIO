@@ -1,0 +1,60 @@
+.ai-planner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.ai-planner h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #2E2E2E;
+  font-weight: 700;
+}
+
+.ai-planner button {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  background: #8A9A5B;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ai-planner button:hover {
+  background: #72814B;
+}
+
+.ai-planner button:disabled {
+  background: #C7D2A5;
+  cursor: not-allowed;
+}
+
+.schedule-box {
+  flex: 1;
+  border: 1px solid #E8E1D9;
+  border-radius: 14px;
+  background: #FFFCF8;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 16px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.schedule-box p {
+  margin: 0;
+  color: #6B7280;
+}
+
+.schedule-box pre {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre-wrap;
+  line-height: 1.7;
+  color: #2E2E2E;
+  font-size: 0.95rem;
+}

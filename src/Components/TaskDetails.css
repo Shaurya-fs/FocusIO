@@ -1,0 +1,46 @@
+
+
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.task-details h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: #2E2E2E;
+}
+
+.task-details__empty {
+  color: #6B7280;
+  font-style: italic;
+}
+
+.task-details__card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid #E8E1D9;
+  background: #FFFCF8;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.task-details__card p {
+  margin: 0;
+  color: #4B5563;
+  line-height: 1.6;
+}
+
+.task-details__status {
+  display: inline-block;
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #F4F8EE;
+  color: #72814B;
+  font-weight: 600;
+}
