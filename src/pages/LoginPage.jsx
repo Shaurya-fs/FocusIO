@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./LoginPage.css";
 
 function LoginPage({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -8,7 +9,8 @@ function LoginPage({ onLogin }) {
     <div className="login-page">
       <div className="login-card">
         <div className="LoginCredentials">
-          <h1>FocusIO</h1>
+          <h1>FocuSIO</h1>
+          <p className="login-subtitle">AI assisted daily planner</p>
 
           <input
             type="text"

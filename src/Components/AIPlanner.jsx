@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./AIPlanner.css";
 
-function AIPlanner() {
+function AIPlanner({ tasks }) {
   const [schedule, setSchedule] = useState("");
   const [loading, setLoading] = useState(false);
   const handleGenerate = async () => {
@@ -13,6 +13,7 @@ function AIPlanner() {
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify({ tasks }),
             });
 
             const data = await response.json();

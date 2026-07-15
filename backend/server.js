@@ -84,6 +84,8 @@ app.post('/tasks',(req,res)=>{
     });
 });
 app.patch('/tasks/:id',(req,res)=>{
+  console.log("Patch called ");
+  console.log (req.body);
     const {id}=req.params;
     const { title, description, dueDate, priority, time, completed } = req.body;
     const sql = "UPDATE tasks SET title = ?, description = ?, due_date = ?, priority = ?, task_time = ?, completed = ? WHERE id = ?";

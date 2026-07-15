@@ -12,7 +12,12 @@ function AddTask({ addTask, updateTask, editingTask }) {
 
   useEffect(() => {
     if (editingTask) {
-      setTask(editingTask);
+      setTask({
+        ...editingTask,
+        dueDate: editingTask.dueDate
+          ? editingTask.dueDate.split("T")[0]
+          : "",
+      });
     }
   }, [editingTask]);
 

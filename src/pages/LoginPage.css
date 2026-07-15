@@ -1,21 +1,81 @@
-
-
 .login-page {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #FAF8F5;
   padding: 20px;
   box-sizing: border-box;
+  background: linear-gradient(
+    135deg,
+    #FFF5E8 0%,
+    #FAF8F5 55%,
+    #EEF5FF 100%
+  );
 }
 
 .login-card {
   width: 100%;
-  max-width: 380px;
-  background: #FFFCF8;
+  max-width: 420px;
+  padding: 20px;
+  text-align: center;
+}
+
+.LoginCredentials {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LoginCredentials h1 {
+  margin: 0;
+  font-size: 4rem;
+  font-weight: 800;
+  color: #1F2937;
+}
+
+.LoginCredentials h1 span {
+  color: #8A9A5B;
+}
+
+.login-subtitle {
+  margin: 12px 0 36px;
+  color: #6B7280;
+  font-size: 1.1rem;
+}
+
+.LoginCredentials input {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 18px;
   border: 1px solid #E8E1D9;
-  border-radius: 18px;
-  padding: 32px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  border-radius: 14px;
+  background: #FFFFFF;
+  font-size: 1rem;
+  color: #2E2E2E;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+}
+
+.LoginCredentials input:focus {
+  outline: none;
+  border-color: #8A9A5B;
+  box-shadow: 0 0 0 3px rgba(138,154,91,0.15);
+}
+
+.LoginCredentials button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 14px;
+  background: #8A9A5B;
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.LoginCredentials button:hover {
+  background: #72814B;
 }

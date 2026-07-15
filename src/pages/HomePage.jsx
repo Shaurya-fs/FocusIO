@@ -145,7 +145,7 @@ function HomePage() {
         </div>
 
         <div className="dashboard__panel">
-          <AIPlanner />
+          <AIPlanner tasks={tasks} />
         </div>
 
         <div className="dashboard__panel">

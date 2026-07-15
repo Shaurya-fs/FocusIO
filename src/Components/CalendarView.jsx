@@ -11,11 +11,26 @@ function CalendarView({ tasks }) {
   const activeTasks = tasks.filter((task) => !task.completed).length;
   const completedTasks = tasks.length - activeTasks;
 
+  const start = new Date();
+  start.setHours(9, 0, 0, 0);
+
+  const end = new Date(start);
+  end.setHours(10, 0, 0, 0);
+
+  const formatGoogleDate = (date) =>
+    date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+
+  const googleCalendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=FocusIO+Daily+Plan&details=${encodeURIComponent(
+    tasks
+      .map((task) => `• ${task.title}${task.time ? ` (${task.time})` : ""}`)
+      .join("\n")
+  )}&dates=${formatGoogleDate(start)}/${formatGoogleDate(end)}`;
+
   return (
     <div className="calendar-view">
       <div className="calendar-view__copy">
         <p className="calendar-view__eyebrow">Google Calendar</p>
-        <h2>Calender</h2>
+        <h2>Calendar</h2>
       </div>
 
       <div className="calendar-view__stats">
@@ -36,15 +51,15 @@ function CalendarView({ tasks }) {
       <div className="calendar-view__actions">
         <a
           className="calendar-view__primary"
-          href="https://calendar.google.com/"
+          href={googleCalendarLink}
           target="_blank"
           rel="noreferrer"
         >
-          Link Google Calendar
+          Add Today's Tasks to Google Calendar
         </a>
 
         <p className="calendar-view__note">
-        
+          Opens Google Calendar with today's task list pre-filled in a new event.
         </p>
       </div>
     </div>
