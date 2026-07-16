@@ -21,6 +21,25 @@ db.connect((err)=>{
     }
     console.log("connected to MySQL");
 });
+
+const formatDueDate = (value) => {
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+};
+
 app.get('/tasks', (req, res) => {
     const sql = `
 SELECT
@@ -83,23 +102,65 @@ app.post('/tasks',(req,res)=>{
         });
     });
 });
-app.patch('/tasks/:id',(req,res)=>{
-  console.log("Patch called ");
-  console.log (req.body);
-    const {id}=req.params;
-    const { title, description, dueDate, priority, time, completed } = req.body;
-    const sql = "UPDATE tasks SET title = ?, description = ?, due_date = ?, priority = ?, task_time = ?, completed = ? WHERE id = ?";
-    db.query(sql,[title, description, dueDate, priority, time, completed, id],(err,result)=>{
-        if(err){
-            return res.status(500).json({message:"Error updating task",
-            error:err.message
-            });
-        }
-        if(result.affectedRows===0){
-            return res.status(404).json({message:'Task not found'});
-        }
-        res.json({message :'task updated successfully'})
-    });
+app.patch("/tasks/:id", (req, res) => {
+  const { id } = req.params;
+  const { title, description, dueDate, priority, time, completed } = req.body;
+
+  const fields = [];
+  const values = [];
+
+  if (title !== undefined) {
+    fields.push("title = ?");
+    values.push(title);
+  }
+
+  if (description !== undefined) {
+    fields.push("description = ?");
+    values.push(description);
+  }
+
+  if (dueDate !== undefined) {
+    fields.push("due_date = ?");
+    values.push(dueDate || null);
+  }
+
+  if (priority !== undefined) {
+    fields.push("priority = ?");
+    values.push(priority);
+  }
+
+  if (time !== undefined) {
+    fields.push("task_time = ?");
+    values.push(time || null);
+  }
+
+  if (completed !== undefined) {
+    fields.push("completed = ?");
+    values.push(completed ? 1 : 0);
+  }
+
+  if (fields.length === 0) {
+    return res.status(400).json({ message: "No fields provided for update" });
+  }
+
+  const sql = `UPDATE tasks SET ${fields.join(", ")} WHERE id = ?`;
+  values.push(id);
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("PATCH /tasks error:", err);
+      return res.status(500).json({
+        message: "Error updating task",
+        error: err.message
+      });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    res.json({ message: "Task updated successfully" });
+  });
 });
 app.delete("/tasks/:id", (req, res) => {
   const { id } = req.params;
@@ -142,7 +203,7 @@ app.post("/generateSchedule", (req, res) => {
     }
 
     if (task.dueDate) {
-      schedule += ` | Due: ${task.dueDate}`;
+      schedule += ` | Due: ${formatDueDate(task.dueDate)}`;
     }
 
     schedule += "\n";

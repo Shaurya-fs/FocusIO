@@ -120,11 +120,6 @@ function HomePage() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          title: taskToUpdate.title,
-          description: taskToUpdate.description,
-          dueDate: taskToUpdate.dueDate,
-          priority: taskToUpdate.priority,
-          time: taskToUpdate.time,
           completed: !taskToUpdate.completed
         })
       });
