@@ -1,5 +1,23 @@
 import "./TaskList.css";
 
+const formatDueDate = (value) => {
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+};
+
 export function TaskList({ tasks, toggleTask, deleteTask, onSelectTask, startEditing }) {
   return (
     <div className="task-list">
@@ -15,7 +33,7 @@ export function TaskList({ tasks, toggleTask, deleteTask, onSelectTask, startEdi
               <p>Status: {task.completed ? "Completed" : "Active"}</p>
               {task.description &&(<p>{task.description}</p>)}
               {task.priority &&(<p>Priority: {task.priority}</p>)}
-              {task.dueDate &&(<p>Due Date: {task.dueDate}</p>)}
+              {task.dueDate &&(<p>Due Date: {formatDueDate(task.dueDate)}</p>)}
               {task.time && (
                 <p>Time: {task.time}</p>
               )}

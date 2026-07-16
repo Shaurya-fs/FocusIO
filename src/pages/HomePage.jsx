@@ -8,6 +8,31 @@ import "./HomePage.css";
 
 const API_URL = "http://localhost:5001/tasks";
 
+const normalizeCompleted = (value) => {
+  if (typeof value === "boolean") {
+    return value;
+  }
+
+  if (typeof value === "number") {
+    return value === 1;
+  }
+
+  if (typeof value === "string") {
+    return value === "1" || value.toLowerCase() === "true";
+  }
+
+  if (
+    value &&
+    typeof value === "object" &&
+    value.type === "Buffer" &&
+    Array.isArray(value.data)
+  ) {
+    return value.data[0] === 1;
+  }
+
+  return false;
+};
+
 function HomePage() {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
@@ -20,7 +45,12 @@ function HomePage() {
     try {
       const response = await fetch(API_URL);
       const data = await response.json();
-      setTasks(data);
+      const normalizedTasks = data.map((task) => ({
+        ...task,
+        completed: normalizeCompleted(task.completed)
+      }));
+
+      setTasks(normalizedTasks);
     } catch (error) {
       console.log("Error fetching tasks:", error);
     }
@@ -46,7 +76,7 @@ function HomePage() {
         body: JSON.stringify(newTask)
       });
 
-      fetchTasks();
+      await fetchTasks();
     } catch (error) {
       console.log("Error adding task:", error);
     }
@@ -62,8 +92,15 @@ function HomePage() {
         body: JSON.stringify(updatedTask)
       });
 
-      fetchTasks();
+      await fetchTasks();
       setEditingTask(null);
+
+      if (selectedTask && selectedTask.id === updatedTask.id) {
+        setSelectedTask({
+          ...updatedTask,
+          completed: normalizeCompleted(updatedTask.completed)
+        });
+      }
     } catch (error) {
       console.log("Error updating task:", error);
     }
@@ -92,7 +129,7 @@ function HomePage() {
         })
       });
 
-      fetchTasks();
+      await fetchTasks();
 
       if (selectedTask && selectedTask.id === taskId) {
         setSelectedTask({
@@ -111,7 +148,7 @@ function HomePage() {
         method: "DELETE"
       });
 
-      fetchTasks();
+      await fetchTasks();
 
       if (selectedTask && selectedTask.id === taskId) {
         setSelectedTask(null);

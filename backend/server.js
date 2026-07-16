@@ -141,6 +141,10 @@ app.post("/generateSchedule", (req, res) => {
       schedule += ` (${task.priority} priority)`;
     }
 
+    if (task.dueDate) {
+      schedule += ` | Due: ${task.dueDate}`;
+    }
+
     schedule += "\n";
   });
 

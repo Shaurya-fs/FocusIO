@@ -71,15 +71,26 @@ function AddTask({ addTask, updateTask, editingTask }) {
           placeholder="Description"/>
 
         <div className="add-task__row">
+          <div className="add-task__field">
+            <label className="add-task__label" htmlFor="task-due-date">
+              Due Date
+            </label>
           <input
+            id="task-due-date"
             type="date"
             className="add-task__dueDate"
             value={task.dueDate}
             onChange={(event)=>setTask({
               ...task,dueDate:event.target.value
             })}
-            placeholder="Due Date"/>
+          />
+          </div>
+          <div className="add-task__field">
+            <label className="add-task__label" htmlFor="task-time">
+              Time
+            </label>
           <input
+            id="task-time"
             type="time"
             className="add-task__time"
             value={task.time}
@@ -90,6 +101,7 @@ function AddTask({ addTask, updateTask, editingTask }) {
               })
             }
           />
+          </div>
         </div>
         <select
             value={task.priority}

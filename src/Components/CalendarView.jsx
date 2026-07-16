@@ -20,10 +20,13 @@ function CalendarView({ tasks }) {
   const formatGoogleDate = (date) =>
     date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
+  const activeTaskLines = tasks
+    .filter((task) => !task.completed)
+    .map((task) => `• ${task.title}${task.time ? ` (${task.time})` : ""}`)
+    .join("\n");
+
   const googleCalendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=FocusIO+Daily+Plan&details=${encodeURIComponent(
-    tasks
-      .map((task) => `• ${task.title}${task.time ? ` (${task.time})` : ""}`)
-      .join("\n")
+    activeTaskLines
   )}&dates=${formatGoogleDate(start)}/${formatGoogleDate(end)}`;
 
   return (
