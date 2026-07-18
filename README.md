@@ -1,70 +1,111 @@
-# 🚀 FocusIO
+# FocusIO
 
-FocusIO is a full stack task management web application developed as part of my Software Engineering project. The application helps users organize their daily tasks through a simple and user friendly dashboard. It follows a client server architecture with a React frontend, an Express backend, and a MySQL database.
+FocusIO is a full stack AI assisted productivity and task management web application developed as part of my Master's Software Engineering portfolio project. 
+The application enables users to organise daily tasks, generate AI assisted schedules, and synchronise approved schedules with Google Calendar through 
+a modern and intuitive web interface.
 
-The long term goal of the project is to develop an AI powered productivity application with intelligent task scheduling and calendar integration. The current version focuses on building a reliable software foundation with complete CRUD functionality.
+The project follows a modular client server architecture using React for the frontend, Express.js for the backend, MySQL for data persistence, 
+and external APIs for AI generated scheduling and calendar integration.
 
 ---
 
-## ✨ Features
+## Features
+
+### Task Management
 
 - Create new tasks
-- View all tasks
-- Update task completion status
+- Edit existing tasks
 - Delete tasks
-- Persistent task storage using MySQL
-- REST API built with Express
-- React based responsive user interface
-- Component based frontend architecture
+- Mark tasks as completed
+- View expandable task details
+- Store tasks persistently using MySQL
+
+### AI Productivity Assistant
+
+- Generate AI-assisted daily schedules
+- Organise tasks based on user input
+- Review generated schedules before exporting
+
+### Calendar Integration
+
+- Export approved schedules to Google Calendar
+- Synchronise planned activities with an external calendar
+
+### Software Engineering
+
+- RESTful API architecture
+- Modular frontend components
+- Client-server communication using HTTP requests
+- Responsive user interface
+- Persistent database storage
 
 ---
 
-## 🛠️ Tech Stack
+# Technology Stack
 
-### Frontend
+## Frontend
+
 - React
 - Vite
 - JavaScript
 - CSS
 
-### Backend
+## Backend
+
 - Node.js
 - Express.js
 
-### Database
+## Database
+
 - MySQL
 - MySQL Workbench
 
-### Testing
+## APIs
+
+- OpenAI API
+- Google Calendar API
+
+## Testing
+
 - Postman
 - Manual Integration Testing
 
 ---
 
-## 📂 Project Structure
+# Project Structure
 
 ```
 FocusIO
 │
 ├── frontend
 │   ├── src
-│   ├── Components
-│   ├── Pages
-│   └── Assets
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── services
+│   │   ├── hooks
+│   │   └── assets
+│   │
+│   ├── package.json
+│   └── vite.config.js
 │
 ├── backend
+│   ├── routes
+│   ├── controllers
+│   ├── services
+│   ├── database
 │   ├── server.js
 │   ├── package.json
 │   └── .env
 │
-└── README.md
+├── README.md
+└── package.json
 ```
 
 ---
 
-## ⚙️ Installation
+# Installation
 
-### 1. Clone the repository
+## 1. Clone the repository
 
 ```bash
 git clone https://github.com/Shaurya-fs/FocusIO.git
@@ -72,25 +113,27 @@ git clone https://github.com/Shaurya-fs/FocusIO.git
 
 ---
 
-### 2. Install frontend dependencies
+## 2. Install dependencies
+
+### Frontend
 
 ```bash
-cd FocusIO
+cd frontend
+npm install
+```
+
+### Backend
+
+```bash
+cd ../backend
 npm install
 ```
 
 ---
 
-### 3. Install backend dependencies
+## 3. Configure environment variables
 
-```bash
-cd backend
-npm install
-```
-
----
-
-### 4. Create a `.env` file
+Create a `.env` file inside the backend folder.
 
 ```env
 DB_HOST=localhost
@@ -98,11 +141,17 @@ DB_USER=your_username
 DB_PASSWORD=your_password
 DB_NAME=focusio
 DB_PORT=3306
+
+OPENAI_API_KEY=your_openai_api_key
+
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_REDIRECT_URI=your_redirect_uri
 ```
 
 ---
 
-### 5. Create the database
+## 4. Create the database
 
 ```sql
 CREATE DATABASE focusio;
@@ -112,19 +161,23 @@ USE focusio;
 CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
+    description TEXT,
+    due_date DATE,
+    priority ENUM('Low','Medium','High'),
+    estimated_duration VARCHAR(50),
     completed BOOLEAN DEFAULT FALSE
 );
 ```
 
 ---
 
-### 6. Start the backend
+## 5. Start the backend
 
 ```bash
 npm run dev
 ```
 
-Backend runs on:
+Backend:
 
 ```
 http://localhost:5001
@@ -132,13 +185,13 @@ http://localhost:5001
 
 ---
 
-### 7. Start the frontend
+## 6. Start the frontend
 
 ```bash
 npm run dev
 ```
 
-Frontend runs on:
+Frontend:
 
 ```
 http://localhost:5173
@@ -146,79 +199,91 @@ http://localhost:5173
 
 ---
 
-## 📡 API Endpoints
+# REST API Endpoints
 
 | Method | Endpoint | Description |
 |---------|----------|-------------|
-| GET | `/tasks` | Retrieve all tasks |
-| POST | `/tasks` | Create a new task |
-| PATCH | `/tasks/:id` | Update an existing task |
-| DELETE | `/tasks/:id` | Delete a task |
+| GET | /tasks | Retrieve all tasks |
+| GET | /tasks/:id | Retrieve a single task |
+| POST | /tasks | Create a task |
+| PUT | /tasks/:id | Update a task |
+| DELETE | /tasks/:id | Delete a task |
+| POST | /generateSchedule | Generate an AI schedule |
+| POST | /calendar/export | Export schedule to Google Calendar |
 
 ---
 
-## 📸 Current Application
+# Application Overview
 
-The current version includes:
+The current implementation includes:
 
-- Login Page
-- Task Dashboard
-- Add Task
-- Task Details
-- Calendar Panel
-- Full CRUD Operations
-- MySQL Integration
-
----
-
-## 🚧 Future Improvements
-
-The next development phase will focus on:
-
-- User Authentication
-- AI-powered Scheduling Assistant
-- Intelligent Task Prioritization
-- Google Calendar Integration
-- Notifications and Reminders
-- Analytics Dashboard
-- Mobile Responsive Improvements
+- User-friendly dashboard
+- Expandable task details
+- Task creation and editing
+- Task completion tracking
+- AI schedule generation
+- Google Calendar integration
+- Full CRUD functionality
+- MySQL database integration
+- Responsive interface
 
 ---
 
-## 🎯 Project Status
+# Future Improvements
 
-**Current Version:** Phase 2
+Potential future enhancements include:
 
-Completed:
-
-- React Frontend
-- Express Backend
-- MySQL Integration
-- CRUD Functionality
-- REST API
-- Full Frontend–Backend Integration
-
-Upcoming (Phase 3):
-
-- AI Features
-- Authentication
-- Calendar Synchronization
-- Productivity Analytics
+- User authentication and authorisation
+- Multi-user support
+- Collaborative task management
+- AI personalisation based on user behaviour
+- Recurring task automation
+- Push notifications and reminders
+- Offline functionality
+- Docker deployment
+- CI/CD pipeline
+- Cloud hosting
 
 ---
 
-## 👨‍💻 Author
+# Project Status
+
+**Current Version:** Phase 3 (Final Portfolio Version)
+
+### Completed
+
+- Full-stack React application
+- Express.js REST API
+- MySQL database integration
+- Complete CRUD operations
+- AI-assisted scheduling
+- Google Calendar integration
+- Modular software architecture
+- Responsive frontend
+- Frontend-backend integration
+
+---
+
+# Screenshots
+
+Screenshots of the application are available in the project documentation and can also be viewed below.
+
+*(Add screenshots here after uploading them to GitHub.)*
+
+---
+
+# Author
 
 **Shaurya Arora**
 
 Master's Student in Computer Science
 
-Software Engineering Project – FocusIO
+Software Engineering Portfolio Project
 
 GitHub: https://github.com/Shaurya-fs
 
 ---
 
-## 📄 License
+# License
 
-This project was developed for academic purposes as part of a Software Engineering course.
+This project was developed for academic and portfolio purposes as part of a Master's Software Engineering course.
