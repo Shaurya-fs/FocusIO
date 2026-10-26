@@ -1,0 +1,39 @@
+.task-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 68px;
+  padding: 10px 12px 10px 16px;
+  border-radius: 16px;
+}
+
+.task-row[data-done="yes"] {
+  opacity: 0.62;
+}
+
+.task-row__time {
+  min-width: 52px;
+  max-width: 92px;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.task-row__text {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.task-row__text .calendar-button {
+  margin-top: 6px;
+  color: inherit;
+  border-color: currentColor;
+  opacity: 0.8;
+}
+
+.task-row__title {
+  font-weight: 700;
+  font-size: calc(var(--fs) + 1px);
+  line-height: 1.25;
+}

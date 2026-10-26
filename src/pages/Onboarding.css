@@ -1,0 +1,115 @@
+.welcome {
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 18px 26px 28px 26px;
+}
+
+.welcome__language {
+  align-self: flex-end;
+  min-height: 44px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.welcome__middle {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.welcome__bear {
+  display: block;
+  width: 210px;
+  height: auto;
+}
+
+.welcome__buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.onboarding {
+  padding-top: 22px;
+}
+
+.onboarding__card {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.onboarding__spacer {
+  flex-grow: 1;
+}
+
+.onboarding__age-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.onboarding__age-btn {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  text-align: center;
+  font-size: 26px;
+}
+
+.onboarding__age-input {
+  width: 100px;
+  min-height: 64px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.onboarding__sso {
+  min-height: 52px;
+  border: 1px solid var(--line2);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--fs);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.onboarding__sso--apple {
+  background: #000000;
+  color: #FFFFFF;
+  border-color: #000000;
+}
+
+.onboarding__divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.onboarding__divider span:first-child,
+.onboarding__divider span:last-child {
+  flex-grow: 1;
+  height: 1px;
+  background: var(--line2);
+}
+
+.onboarding__code {
+  min-height: 64px;
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 0.4em;
+  font-weight: 700;
+}

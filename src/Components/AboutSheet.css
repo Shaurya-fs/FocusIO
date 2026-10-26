@@ -1,0 +1,56 @@
+.about__field {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 16px;
+  border: 1px solid var(--line2);
+  border-radius: 14px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  font-size: var(--fs);
+}
+
+.about__option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 60px;
+  padding: 8px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  text-align: left;
+}
+
+.about__option[data-on="yes"] {
+  background: var(--bg);
+}
+
+.about__box {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: 2px solid var(--ink2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about__box svg {
+  opacity: 0;
+}
+
+.about__option[data-on="yes"] .about__box {
+  background: var(--btn);
+  border-color: var(--btn);
+}
+
+.about__option[data-on="yes"] .about__box svg {
+  opacity: 1;
+  stroke: var(--btn-ink);
+}

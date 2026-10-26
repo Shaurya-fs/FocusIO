@@ -1,0 +1,73 @@
+.focus-session {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  overflow-y: auto;
+  background: var(--bg);
+  padding: 40px 24px calc(28px + env(safe-area-inset-bottom)) 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.focus-session__bear {
+  height: auto;
+}
+
+.focus-session__task {
+  margin: 0;
+  font-size: calc(var(--fs) + 8px);
+  line-height: 1.2;
+}
+
+.focus-session__timer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.focus-session__clock {
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.focus-session__bar {
+  width: 100%;
+  max-width: 260px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.focus-session__bar div {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--hero);
+}
+
+.focus-session__card {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.focus-session__buttons {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

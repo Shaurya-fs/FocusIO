@@ -1,0 +1,44 @@
+.read-aloud {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 1px solid var(--line2);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.read-aloud[aria-pressed="true"] {
+  background: var(--btn);
+  border-color: var(--btn);
+  color: var(--btn-ink);
+}
+
+.read-aloud--hero {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--hero-ink);
+}
+
+.read-aloud--hero[aria-pressed="true"] {
+  background: var(--hero-btn);
+  border-color: var(--hero-btn);
+  color: var(--hero-btn-ink);
+}
+
+.read-aloud__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.read-aloud__word {
+  background: var(--cele-bg);
+  color: var(--cele-ink);
+  border-radius: 4px;
+  padding: 0 2px;
+}

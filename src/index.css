@@ -1,48 +1,684 @@
-:root {
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #122033;
-  background:
-    radial-gradient(circle at top left, #ffe6c2 0, transparent 28%),
-    radial-gradient(circle at right, #dbeaf7 0, transparent 32%),
-    linear-gradient(180deg, #f7f1e8 0%, #f3f5f8 100%);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-button,
-input {
-  font: inherit;
+  background: #E9E5DB;
+  font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
 }
 
 button {
-  border-radius: 12px;
-  border: 1px solid transparent;
+  font-family: inherit;
   cursor: pointer;
-  transition:
-    transform 160ms ease,
-    opacity 160ms ease;
+  color: inherit;
 }
 
-button:hover {
-  transform: translateY(-1px);
+textarea,
+input,
+select {
+  font-family: inherit;
+  color: inherit;
 }
 
-#root {
+/* Colours for each brain profile. Components only use these variables. */
+
+.app {
+  --bg: #F5F1E8;
+  --surface: #FFFFFF;
+  --line: #E4DED0;
+  --line2: #CFC8B8;
+  --ink: #23262B;
+  --ink2: #565B63;
+  --btn: #23262B;
+  --btn-ink: #FFFFFF;
+  --hero: #1F3B6B;
+  --hero-ink: #FFFFFF;
+  --hero-sub: #DCE7F7;
+  --hero-btn: #F5F1E8;
+  --hero-btn-ink: #1F3B6B;
+  --focus: #1F3B6B;
+  --danger: #B42318;
+  --cele-bg: #F8E4C6;
+  --cele-ink: #65380A;
+  --cele-dot: #C98424;
+  --study-bg: #DCE7F7;
+  --study-fg: #1E3F73;
+  --body-bg: #DDEBDD;
+  --body-fg: #244A2B;
+  --project-bg: #EADFF2;
+  --project-fg: #432A5E;
+  --people-bg: #F8E4C6;
+  --people-fg: #65380A;
+  --life-bg: #D8EAEA;
+  --life-fg: #14464A;
+  --fs: 16px;
+  --lh: 1.45;
+  --ls: 0em;
+  --ws: 0em;
+
+  position: relative;
   width: 100%;
-  min-height: 100vh;
-  padding: 2rem;
+  max-width: 480px;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+  font-size: var(--fs);
+  line-height: var(--lh);
+  letter-spacing: var(--ls);
+  word-spacing: var(--ws);
+}
+
+.app[data-theme="adhd"] {
+  --bg: #FBF6EA;
+  --line: #EADFC8;
+  --btn: #1D4ED8;
+  --hero: #1D4ED8;
+  --hero-sub: #DBE6FF;
+  --hero-btn: #FFFFFF;
+  --hero-btn-ink: #1B44BD;
+  --focus: #1D4ED8;
+  --cele-bg: #FFE3A8;
+  --cele-ink: #5A2E00;
+  --cele-dot: #F59E0B;
+  --study-bg: #CFE0FF;
+  --study-fg: #11306B;
+  --body-bg: #C9EFCF;
+  --body-fg: #0F3D1A;
+  --project-bg: #E3D0FA;
+  --project-fg: #35155C;
+  --people-bg: #FFD9A0;
+  --people-fg: #5A2E00;
+  --life-bg: #C4EBEC;
+  --life-fg: #0E4046;
+}
+
+.app[data-theme="autism"] {
+  --bg: #F0EEE9;
+  --surface: #FAF9F6;
+  --line: #DDD9D0;
+  --line2: #C9C5BB;
+  --ink: #2A2D33;
+  --ink2: #5B6068;
+  --btn: #3F5570;
+  --hero: #3F5570;
+  --hero-sub: #DDE5EE;
+  --hero-btn: #F0EEE9;
+  --hero-btn-ink: #33465C;
+  --focus: #3F5570;
+  --cele-bg: #E6E9E2;
+  --cele-ink: #34413A;
+  --cele-dot: #7C8F82;
+  --study-bg: #DCE3EC;
+  --study-fg: #2C3E57;
+  --body-bg: #DDE6DE;
+  --body-fg: #2F4736;
+  --project-bg: #E3DEE8;
+  --project-fg: #4A3D5C;
+  --people-bg: #EBE3D5;
+  --people-fg: #5E4A2B;
+  --life-bg: #DCE6E6;
+  --life-fg: #2F4A4C;
+}
+
+.app[data-theme="audhd"] {
+  --bg: #F0EEE9;
+  --surface: #FAF9F6;
+  --line: #DDD9D0;
+  --line2: #C9C5BB;
+  --ink: #2A2D33;
+  --ink2: #5B6068;
+  --btn: #C2410C;
+  --btn-ink: #FFFFFF;
+  --hero: #3F5570;
+  --hero-sub: #DDE5EE;
+  --hero-btn: #FFFFFF;
+  --hero-btn-ink: #9A3412;
+  --focus: #C2410C;
+  --cele-bg: #FBE3D2;
+  --cele-ink: #6B2A0C;
+  --cele-dot: #C2410C;
+  --study-bg: #DCE3EC;
+  --study-fg: #2C3E57;
+  --body-bg: #DDE6DE;
+  --body-fg: #2F4736;
+  --project-bg: #E3DEE8;
+  --project-fg: #4A3D5C;
+  --people-bg: #EBE3D5;
+  --people-fg: #5E4A2B;
+  --life-bg: #DCE6E6;
+  --life-fg: #2F4A4C;
+}
+
+/* Colour schemes from Settings. Linen is the default and keeps the profile colours above.
+   Reading support, low battery and dark mode come after, so they still win. */
+
+.app[data-palette="mist"] {
+  --bg: #EEF1F4;
+  --surface: #FFFFFF;
+  --line: #DCE2E8;
+  --line2: #C5CDD6;
+  --ink: #222831;
+  --ink2: #56606B;
+  --btn: #2F4A63;
+  --btn-ink: #FFFFFF;
+  --hero: #2F4A63;
+  --hero-sub: #D9E4EE;
+  --hero-btn: #F4F7FA;
+  --hero-btn-ink: #2F4A63;
+  --focus: #2F4A63;
+  --cele-bg: #DCE7F0;
+  --cele-ink: #24394D;
+  --cele-dot: #7F9DB8;
+}
+
+.app[data-palette="peach"] {
+  --bg: #FFF4EC;
+  --surface: #FFFFFF;
+  --line: #F2DDCD;
+  --line2: #E3C4AE;
+  --ink: #2E2420;
+  --ink2: #6B5A50;
+  --btn: #B9502C;
+  --btn-ink: #FFFFFF;
+  --hero: #A8471F;
+  --hero-sub: #FFF1E8;
+  --hero-btn: #FFF4EC;
+  --hero-btn-ink: #8E3A1E;
+  --focus: #B9502C;
+  --cele-bg: #FFE1CC;
+  --cele-ink: #6E2C12;
+  --cele-dot: #E8915F;
+  --study-bg: #FCE3D6;
+  --study-fg: #7A3416;
+  --people-bg: #FFE7C2;
+  --people-fg: #6B3D00;
+}
+
+.app[data-palette="sage"] {
+  --bg: #F1F5EE;
+  --surface: #FFFFFF;
+  --line: #DCE6D5;
+  --line2: #C4D3BA;
+  --ink: #1F2A22;
+  --ink2: #55625A;
+  --btn: #3E7A57;
+  --btn-ink: #FFFFFF;
+  --hero: #3A7352;
+  --hero-sub: #E6F4EA;
+  --hero-btn: #F1F5EE;
+  --hero-btn-ink: #2D5C40;
+  --focus: #3E7A57;
+  --cele-bg: #DDEFD9;
+  --cele-ink: #234A31;
+  --cele-dot: #6BAF7F;
+  --body-bg: #D4EBD4;
+  --body-fg: #1E4D2B;
+}
+
+.app[data-palette="berry"] {
+  --bg: #FBF1F6;
+  --surface: #FFFFFF;
+  --line: #F0D9E5;
+  --line2: #E0BCD0;
+  --ink: #2A1F2B;
+  --ink2: #65536A;
+  --btn: #8E3B8A;
+  --btn-ink: #FFFFFF;
+  --hero: #5B3FA8;
+  --hero-sub: #E3DBFA;
+  --hero-btn: #FFFFFF;
+  --hero-btn-ink: #4A2F95;
+  --focus: #8E3B8A;
+  --cele-bg: #FFE3EF;
+  --cele-ink: #7A1F4F;
+  --cele-dot: #E85D9C;
+  --study-bg: #DCE4FF;
+  --study-fg: #283F9C;
+  --body-bg: #D6F5E0;
+  --body-fg: #16613A;
+  --project-bg: #EBDCFF;
+  --project-fg: #4F2A8F;
+  --people-bg: #FFE2CC;
+  --people-fg: #8A3A00;
+  --life-bg: #CFF3F0;
+  --life-fg: #0E5A55;
+}
+
+.app[data-read="on"] {
+  --bg: #FBEFD9;
+  --surface: #FFF8EA;
+  --line: #EBDDBE;
+  --line2: #D9C7A0;
+  --ink: #2B2B2B;
+  --ink2: #514E47;
+  --fs: 17px;
+  --lh: 1.65;
+  --ls: 0.02em;
+  --ws: 0.08em;
+  font-family: "Lexend", "Atkinson Hyperlegible", sans-serif;
+}
+
+.app[data-low="on"] {
+  --bg: #E9E7F0;
+  --surface: #F6F5FA;
+  --line: #D8D5E2;
+  --line2: #C4C1D2;
+  --ink: #2B2A36;
+  --ink2: #565467;
+  --btn: #4B4A63;
+  --btn-ink: #FFFFFF;
+  --hero: #4B4A63;
+  --hero-sub: #E1E0EE;
+  --hero-btn: #F3F2F8;
+  --hero-btn-ink: #3A3950;
+  --focus: #4B4A63;
+}
+
+.app[data-low="on"][data-read="on"] {
+  --bg: #F2E4CB;
+  --surface: #FBF3E2;
+  --line: #E3D2AE;
+  --line2: #D0BC90;
+}
+
+.app[data-size="s"] {
+  --fs: 15px;
+}
+
+.app[data-size="l"] {
+  --fs: 19px;
+}
+
+.app[data-mode="dark"][data-theme][data-read][data-low] {
+  --bg: #16181D;
+  --surface: #1F2229;
+  --line: #2E323B;
+  --line2: #444A56;
+  --ink: #F1EEE8;
+  --ink2: #B4B8C0;
+  --btn: #F1EEE8;
+  --btn-ink: #16181D;
+  --hero: #2A3F66;
+  --hero-ink: #FFFFFF;
+  --hero-sub: #C9D8F2;
+  --hero-btn: #F1EEE8;
+  --hero-btn-ink: #1B2F55;
+  --focus: #9DB7F0;
+  --danger: #FF8A80;
+  --cele-bg: #3A2E1C;
+  --cele-ink: #F8E4C6;
+  --cele-dot: #C98424;
+  --study-bg: #233450;
+  --study-fg: #CFE0FF;
+  --body-bg: #22382A;
+  --body-fg: #CBEBD2;
+  --project-bg: #38294A;
+  --project-fg: #E8D9F7;
+  --people-bg: #4A3A22;
+  --people-fg: #FFE3B5;
+  --life-bg: #1F3B3D;
+  --life-fg: #C4E8EA;
+}
+
+.app button:focus-visible,
+.app textarea:focus-visible,
+.app input:focus-visible,
+.app select:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.app textarea::placeholder,
+.app input::placeholder {
+  color: var(--ink2);
+  opacity: 0.85;
+}
+
+/* Text */
+
+.h {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.app[data-read="on"] .h {
+  font-family: "Lexend", "Atkinson Hyperlegible", sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.t-xs {
+  font-size: calc(var(--fs) - 3px);
+}
+
+.t-sm {
+  font-size: calc(var(--fs) - 1px);
+}
+
+.t-lg {
+  font-size: calc(var(--fs) + 6px);
+}
+
+.t-xl {
+  font-size: calc(var(--fs) + 14px);
+  line-height: 1.12;
+}
+
+.muted {
+  color: var(--ink2);
+}
+
+.title-row {
+  margin: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* Layout */
+
+.screen {
+  flex-grow: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 26px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Long pages scroll instead of squashing their cards. */
+.screen > * {
+  flex-shrink: 0;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
+.chip {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-size: calc(var(--fs) - 2px);
+  color: var(--ink2);
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: calc(var(--fs) - 2px);
+  white-space: nowrap;
+}
+
+/* Buttons */
+
+.btn {
+  min-height: 50px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--btn);
+  color: var(--btn-ink);
+  font-size: var(--fs);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn2 {
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--line2);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink);
+  font-size: calc(var(--fs) - 1px);
+  font-weight: 700;
+  text-align: left;
+}
+
+.btn2[data-on="yes"] {
+  background: var(--btn);
+  color: var(--btn-ink);
+  border-color: var(--btn);
+}
+
+.btn2--center {
+  text-align: center;
+}
+
+.btn2--plain {
+  border-color: transparent;
+  text-align: center;
+}
+
+.icon-btn {
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mini {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid currentColor;
+  border-radius: 12px;
+  background: transparent;
+  font-weight: 700;
+  font-size: calc(var(--fs) - 2px);
+  flex-shrink: 0;
+}
+
+.ck {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ck svg {
+  opacity: 0;
+}
+
+.ck[data-done="yes"] {
+  background: currentColor;
+}
+
+.ck[data-done="yes"] svg {
+  opacity: 1;
+  stroke: var(--surface);
+}
+
+/* Form fields */
+
+.tf {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 14px;
+  border: 1px solid var(--line2);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: var(--fs);
+}
+
+.ta {
+  width: 100%;
+  min-height: 168px;
+  padding: 12px 14px;
+  border: 1px solid var(--line2);
+  border-radius: 14px;
+  background: var(--bg);
+  font-size: var(--fs);
+  line-height: var(--lh);
+  resize: none;
+}
+
+/* Segmented buttons */
+
+.segwrap {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--line2);
+}
+
+.seg {
+  flex: 1;
+  min-height: 44px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  font-weight: 700;
+  font-size: calc(var(--fs) - 2px);
+}
+
+.seg[data-on="yes"] {
+  background: var(--btn);
+  color: var(--btn-ink);
+}
+
+/* Rows used on Me, Settings and Routines */
+
+.setrow {
+  width: 100%;
+  min-height: 60px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+}
+
+.setcol {
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.setl {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.setn {
+  font-weight: 700;
+}
+
+.setrow[data-danger="yes"] .setn {
+  color: var(--danger);
+}
+
+/* Task category colours */
+
+.cat-study {
+  background: var(--study-bg);
+  color: var(--study-fg);
+}
+
+.cat-body {
+  background: var(--body-bg);
+  color: var(--body-fg);
+}
+
+.cat-project {
+  background: var(--project-bg);
+  color: var(--project-fg);
+}
+
+.cat-people {
+  background: var(--people-bg);
+  color: var(--people-fg);
+}
+
+.cat-life {
+  background: var(--life-bg);
+  color: var(--life-fg);
+}
+
+.cat-neutral {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+/* Movement. Everything stops when Movement is off or the phone asks for less motion. */
+
+@keyframes breathe {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(1.03); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.breathe {
+  transform-origin: 50% 100%;
+  animation: breathe 3.4s ease-in-out infinite;
+}
+
+.rise {
+  animation: rise 0.5s ease-out both;
+}
+
+.app[data-motion="off"] .breathe,
+.app[data-motion="off"] .rise {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breathe,
+  .rise {
+    animation: none;
+  }
 }

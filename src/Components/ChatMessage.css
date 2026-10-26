@@ -1,0 +1,59 @@
+.chat-message__user {
+  align-self: flex-end;
+  max-width: 82%;
+  padding: 10px 16px;
+  border-radius: 20px 20px 6px 20px;
+  background: var(--btn);
+  color: var(--btn-ink);
+}
+
+.chat-message__bear-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.chat-message__avatar {
+  display: block;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.chat-message__avatar img {
+  display: block;
+}
+
+.chat-message__bear {
+  align-self: flex-start;
+  max-width: 92%;
+  padding: 14px 16px;
+  border-radius: 20px 20px 20px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-message__card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.chat-message__card .calendar-button {
+  margin-top: 8px;
+  color: inherit;
+  border-color: currentColor;
+}
+
+.chat-message__choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

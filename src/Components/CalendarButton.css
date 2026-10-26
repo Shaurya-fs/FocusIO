@@ -1,0 +1,23 @@
+.calendar-button {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--line2);
+  border-radius: 999px;
+  color: var(--ink2);
+  font-size: calc(var(--fs) - 3px);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.calendar-button[data-added="yes"] {
+  border-style: dashed;
+}
+
+.calendar-button--hero {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--hero-sub);
+}

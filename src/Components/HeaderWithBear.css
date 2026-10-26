@@ -1,0 +1,15 @@
+.header-bear {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  border-bottom: 1.5px solid var(--line2);
+}
+
+.header-bear__text {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 14px;
+}

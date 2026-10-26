@@ -1,0 +1,12 @@
+.voice-dump {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.voice-dump__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}

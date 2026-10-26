@@ -1,0 +1,27 @@
+.step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.step-header__dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.step-header__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--line2);
+}
+
+.step-header__dot[data-on="yes"] {
+  width: 24px;
+  background: var(--btn);
+}
+
+.step-header__spacer {
+  width: 44px;
+}

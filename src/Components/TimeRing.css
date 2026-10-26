@@ -1,0 +1,28 @@
+.time-ring {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.time-ring svg {
+  flex-shrink: 0;
+}
+
+.time-ring__track,
+.time-ring__fill {
+  fill: none;
+  stroke-width: 5;
+}
+
+.time-ring__track {
+  stroke: rgba(255, 255, 255, 0.25);
+}
+
+.time-ring__fill {
+  stroke: var(--hero-ink);
+  stroke-linecap: round;
+}
+
+.time-ring__label {
+  font-weight: 700;
+}
